@@ -1,0 +1,21 @@
+name: Free VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start VPS
+        run: |
+          echo "Starting VPS..."
+          sudo apt update
+          sudo apt install -y docker.io
+          sudo systemctl start docker
+          sudo docker run -itd --name freevps ubuntu:latest
+          echo "VPS is running!"
